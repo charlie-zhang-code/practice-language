@@ -1,0 +1,58 @@
+# 忽略全部的文件
+*
+
+# 不忽略文件夹的结构
+!*/
+
+# 忽略所有的隐藏文件
+.*
+
+# 禁止忽略以下面后缀的文件
+
+# C/CPP
+!*.c
+!*.h
+!*.cpp
+
+# Java
+!*.xml
+!*.java
+!*.jsp
+
+# PHP与前端
+!*.php
+!*.html
+!*.css
+!*.js
+!*.ts
+!*.vue
+!*.yaml
+!*.yml
+
+# python
+!*.py
+!*.ipynb
+
+# SQL
+!*.sql
+
+# 测试
+!*.http
+
+# Docker、Cmake
+!Dockerfile
+!Makefile
+
+# 资源
+!*.txt
+!*.md
+!*.csv
+!*.xls
+!*.docx
+!*.doc
+!*.png
+!*.jpg
+!*.json
+
+# 不忽略git文件
+!.gitignore
