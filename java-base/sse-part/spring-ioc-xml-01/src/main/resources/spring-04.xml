@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="javaBean" class="com.atguigu.ioc_04.JavaBean" init-method="init" destroy-method="destroy"/>
+
+    <!--  scope属性：取值singleton（默认值），bean在IOC容器中只有一个实例，IOC容器初始化时创建对象-->
+    <bean id="javaBean2" class="com.atguigu.ioc_04.JavaBean2" scope="singleton" />
+    <!--  scope属性：取值prototype，bean在IOC容器中创建多个实例，IOC容器初始化时创建对象-->
+    <bean id="javaBean3" class="com.atguigu.ioc_04.JavaBean3" scope="prototype" />
+
+</beans>
