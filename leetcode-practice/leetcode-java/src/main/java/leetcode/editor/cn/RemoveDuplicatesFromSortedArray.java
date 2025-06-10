@@ -70,20 +70,23 @@ public class RemoveDuplicatesFromSortedArray {
         Solution solution = new RemoveDuplicatesFromSortedArray().new Solution();
     }
 
-    /* ====================================================
-     * 双指针解决
-     * ==================================================== */
 //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeDuplicates(int[] nums) {
-            int slowIndex = 0;
+            int slowIndex = 0; // 慢指针
+            int fastIndex = 0; // 快指针
 
-            for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+            // 遍历数组
+            for (; fastIndex < nums.length; fastIndex++) {
                 if (nums[fastIndex] != nums[slowIndex]) {
+                    // 如果当前元素不等于慢指针指向的元素，则将当前元素赋值给慢指针指向的元素，并移动慢指针
                     nums[++slowIndex] = nums[fastIndex];
                 }
+
+                // 相同就跳过，如此就实现了移除重复元素
             }
 
+            // 返回慢指针的索引加1，即为不重复元素的数量
             return slowIndex + 1;
         }
     }

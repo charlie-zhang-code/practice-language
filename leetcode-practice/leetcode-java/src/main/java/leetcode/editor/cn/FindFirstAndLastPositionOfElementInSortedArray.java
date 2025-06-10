@@ -54,31 +54,33 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         private int findBound(int[] nums, int target, boolean lower) {
-            int index = -1;
-            int left = 0, right = nums.length - 1;
+            int index = -1; // 初始化index为-1，表示未找到目标值
+            int left = 0; // 定义左指针
+            int right = nums.length - 1; // 定义右指针
 
-            while (left <= right) {
+            while (left <= right) { // 左闭右闭区间
                 int mid = left + (right - left) / 2;
 
                 if (nums[mid] > target) {
-                    // 缩小范围，在左边
+                    // 如果中间值大于目标值，目标值可能在左侧，更新右边界
                     right = mid - 1;
                 } else if (nums[mid] < target) {
-                    // 缩小范围，在右边
+                    // 如果中间值小于目标值，目标值可能在右侧，更新左边界
                     left = mid + 1;
                 } else {
-                    // 找到目标值
+                    // 找到目标值，然后再根据lower参数来决定缩小范围
                     index = mid;
                     if (lower) {
-                        // 缩小范围，在左边
+                        // 如果是左边界查找，更新右边界
                         right = mid - 1;
                     } else {
-                        // 缩小范围，在右边
+                        // 如果是右边界查找，更新左边界
                         left = mid + 1;
                     }
                 }
             }
 
+            // 返回index
             return index;
         }
 

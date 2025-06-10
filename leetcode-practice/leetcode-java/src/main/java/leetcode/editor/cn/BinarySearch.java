@@ -64,9 +64,11 @@ public class BinarySearch {
                 // nums[mid] 含义 -> 中间值
                 if (target > nums[mid]) {
                     // 如果中间值小于目标值，则将左边界扩大为mid+1
+                    // 目标值可能落在区间[mid+1, right]内
                     left = mid + 1;
                 } else if (target < nums[mid]) {
                     // 如果中间值大于目标值，则将右边界缩小为mid-1
+                    // 目标值可能落在区间[left, mid-1]内
                     right = mid - 1;
                 } else {
                     // 如果中间值等于目标值，则返回中间值
@@ -81,19 +83,25 @@ public class BinarySearch {
             /* ====================================================
              * 方式二：[左闭，右开)
              * ==================================================== */
-            int left = 0;
-            int right = nums.length;
-            while (left < right) {
+            int left = 0; // 左边界
+            int right = nums.length; // 右边界，因为是右开，所以右边界为nums.length
+            while (left < right) { // 注意：left < right，区间[left, right)有效
                 int mid = left + ((right - left) / 2);
                 if (target > nums[mid]) {
+                    // 如果中间值小于目标值，则将左边界扩大为mid+1
+                    // 目标值可能落在区间[mid+1, right)内
                     left = mid + 1;
                 } else if (target < nums[mid]) {
+                    // 如果中间值大于目标值，则将右边界缩小为mid
+                    // 目标值可能落在区间[left, mid)内
                     right = mid;
                 } else {
+                    // 如果中间值等于目标值，则返回中间值
                     return mid;
                 }
             }
 
+            // 循环结束后，还没有找到目标值，返回-1
             return -1;
         }
     }

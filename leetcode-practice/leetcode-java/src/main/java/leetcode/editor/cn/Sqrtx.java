@@ -48,21 +48,23 @@ public class Sqrtx {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int mySqrt(int x) {
-            int left = 0;
-            int right = x;
-            int ans = -1;
+            int left = 0; // 左边界
+            int right = x; // 右边界
+            int ans = -1; // 初始化结果为-1
 
-            while (left <= right) {
+            while (left <= right) { // 左闭右闭区间
                 int mid = left + (right - left) / 2;
 
+                // 判断mid的平方是否小于等于x
                 if ((long) mid * mid <= x) {
-                    ans = mid;
-                    left = mid + 1;
+                    ans = mid; // 更新结果
+                    left = mid + 1; // 更新左边界
                 } else {
-                    right = mid - 1;
+                    right = mid - 1; // 否则更新右边界
                 }
             }
 
+            // 返回结果
             return ans;
         }
     }

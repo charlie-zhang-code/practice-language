@@ -54,19 +54,20 @@ public class SquaresOfASortedArray {
         Solution solution = new SquaresOfASortedArray().new Solution();
     }
 
-    /* ====================================================
-     * 双指针法
-     * ==================================================== */
 //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] sortedSquares(int[] nums) {
-            int left = 0;
-            int right = nums.length - 1;
+            int left = 0; // 左指针
+            int right = nums.length - 1; // 右指针
 
-            int[] result = new int[nums.length];
+            int[] result = new int[nums.length]; // 结果数组
 
+            // 遍历数组
             for (int i = nums.length - 1; i >= 0; i--) {
                 if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                    // 如果左指针指向的元素绝对值大于右指针指向的元素绝对值
+                    // 则将左指针指向的元素平方赋值给结果数组的当前位置
+                    // 并移动左指针
                     result[i] = nums[left] * nums[left];
                     left++;
                 } else {
@@ -75,6 +76,7 @@ public class SquaresOfASortedArray {
                 }
             }
 
+            // 返回结果数组
             return result;
         }
     }

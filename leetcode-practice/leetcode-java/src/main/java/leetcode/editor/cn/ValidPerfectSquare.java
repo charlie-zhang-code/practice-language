@@ -49,22 +49,28 @@ public class ValidPerfectSquare {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean isPerfectSquare(int num) {
-            int left = 0, right = num;
+            int left = 0, right = num; // 初始化左右边界
 
-            while (left <= right) {
+            while (left <= right) { // 使用左闭右闭区间
                 int mid = left + (right - left) / 2;
 
+                // mid的平方
                 long square = (long) mid * mid;
 
+                // 判断mid的平方是否等于num
                 if (square == num) {
+                    // 找到了
                     return true;
                 } else if (square < num) {
+                    // 如果中间值小于目标值，则目标值在右侧，更新左边界
                     left = mid + 1;
                 } else {
+                    // 如果中间值大于目标值，则目标值在左侧，更新右边界
                     right = mid - 1;
                 }
             }
 
+            // 循环结束后，没有找到满足条件的数，返回false
             return false;
         }
     }

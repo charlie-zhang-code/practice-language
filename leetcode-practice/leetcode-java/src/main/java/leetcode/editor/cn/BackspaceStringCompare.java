@@ -60,55 +60,109 @@ public class BackspaceStringCompare {
         Solution solution = new BackspaceStringCompare().new Solution();
     }
 
-    /* ====================================================
-     * 双指针解决
-     * ==================================================== */
-//leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public boolean backspaceCompare(String s, String t) {
-            int sIndex = s.length() - 1;
-            int tIndex = t.length() - 1;
+            /*
+            // 初始化两个指针，分别从两个字符串的末尾开始遍历
+            int sIndex = s.length() - 1; // s字符串的遍历指针，初始指向最后一个字符
+            int tIndex = t.length() - 1; // t字符串的遍历指针，初始指向最后一个字符
 
-            int sSkip = 0;
-            int tSkip = 0;
+            // 记录需要跳过的字符数（由于退格符'#'的影响）
+            int sSkip = 0; // s字符串中需要跳过的字符数
+            int tSkip = 0; // t字符串中需要跳过的字符数
 
+            // 只要任一字符串还有字符需要比较，就继续循环
             while (sIndex >= 0 || tIndex >= 0) {
+                // 处理s字符串中的退格符和需要跳过的字符
                 while (sIndex >= 0) {
-                    if (s.charAt(sIndex) == '#') {
-                        sSkip++;
-                        sIndex--;
-                    } else if (sSkip > 0) {
-                        sSkip--;
-                        sIndex--;
+                    if (s.charAt(sIndex) == '#') { // 遇到退格符
+                        sSkip++; // 增加需要跳过的字符数
+                        sIndex--; // 指针前移
+                    } else if (sSkip > 0) { // 当前字符需要被跳过
+                        sSkip--; // 减少需要跳过的字符数
+                        sIndex--; // 指针前移（跳过当前字符）
                     } else {
-                        break;
+                        break; // 遇到有效字符，停止处理
                     }
                 }
 
+                // 处理t字符串中的退格符和需要跳过的字符（逻辑同上）
                 while (tIndex >= 0) {
-                    if (t.charAt(tIndex) == '#') {
-                        tSkip++;
-                        tIndex--;
-                    } else if (tSkip > 0) {
-                        tSkip--;
-                        tIndex--;
+                    if (t.charAt(tIndex) == '#') { // 遇到退格符
+                        tSkip++; // 增加需要跳过的字符数
+                        tIndex--; // 指针前移
+                    } else if (tSkip > 0) { // 当前字符需要被跳过
+                        tSkip--; // 减少需要跳过的字符数
+                        tIndex--; // 指针前移（跳过当前字符）
                     } else {
-                        break;
+                        break; // 遇到有效字符，停止处理
                     }
                 }
 
+                // 比较两个字符串当前的有效字符
                 if (sIndex >= 0 && tIndex >= 0) {
+                    // 如果两个字符不相等，返回false
                     if (s.charAt(sIndex) != t.charAt(tIndex)) {
                         return false;
                     }
                 } else {
+                    // 如果一个字符串已经遍历完，另一个还有字符剩余，返回false
                     if (sIndex >= 0 || tIndex >= 0) {
                         return false;
                     }
                 }
 
+                // 指针前移，准备比较前一个字符
                 sIndex--;
                 tIndex--;
+            }
+
+            // 所有字符都比较完毕且都匹配，返回true
+            return true;
+            */
+
+            // 从后向前遍历两个字符串
+            int i = s.length() - 1, j = t.length() - 1;
+            int skipS = 0, skipT = 0;
+
+            while (i >= 0 || j >= 0) {
+                // 处理s中的退格
+                while (i >= 0) {
+                    if (s.charAt(i) == '#') {
+                        skipS++;
+                        i--;
+                    } else if (skipS > 0) {
+                        skipS--;
+                        i--;
+                    } else {
+                        break;
+                    }
+                }
+
+                // 处理t中的退格
+                while (j >= 0) {
+                    if (t.charAt(j) == '#') {
+                        skipT++;
+                        j--;
+                    } else if (skipT > 0) {
+                        skipT--;
+                        j--;
+                    } else break;
+                }
+
+                // 比较当前字符
+                if (i >= 0 && j >= 0 && s.charAt(i) != t.charAt(j)) {
+                    return false;
+                }
+
+                // 如果一个字符串已结束而另一个还有字符
+                if ((i >= 0) != (j >= 0)) {
+                    return false;
+                }
+
+                i--;
+                j--;
             }
 
             return true;

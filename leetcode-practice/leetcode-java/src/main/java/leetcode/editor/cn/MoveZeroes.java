@@ -47,9 +47,6 @@ public class MoveZeroes {
         Solution solution = new MoveZeroes().new Solution();
     }
 
-    /* ====================================================
-     *
-     * ==================================================== */
 //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void moveZeroes(int[] nums) {
@@ -58,12 +55,16 @@ public class MoveZeroes {
 
             while (fastIndex < nums.length) {
                 if (nums[fastIndex] != 0) {
+                    // 快指针指向的元素非0，则交换
                     int temp = nums[slowIndex];
                     nums[slowIndex] = nums[fastIndex];
                     nums[fastIndex] = temp;
+
+                    // 慢指针移动
                     slowIndex++;
                 }
 
+                // 快指针移动
                 fastIndex++;
             }
         }

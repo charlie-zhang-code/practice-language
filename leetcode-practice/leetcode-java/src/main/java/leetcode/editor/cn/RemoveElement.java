@@ -74,21 +74,25 @@ public class RemoveElement {
         Solution solution = new RemoveElement().new Solution();
     }
 
-    /* ====================================================
-     * 双指针法解决
-     * ==================================================== */
-//leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeElement(int[] nums, int val) {
-            int slowIndex = 0;
+            int slowIndex = 0; // 慢指针
+            int fastIndex = 0; // 快指针
 
-            for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+            // 遍历数组
+            for (; fastIndex < nums.length; fastIndex++) {
                 if (nums[fastIndex] != val) {
+                    // 如果当前元素不等于目标值，则将当前元素赋值给慢指针指向的元素，并移动慢指针
                     nums[slowIndex] = nums[fastIndex];
+                    // 慢指针移动
                     slowIndex++;
                 }
+
+                // 如果相等就跳过，如此就实现了移除目标值
             }
 
+            // 返回慢指针的索引，即为不等于目标值的元素数量
             return slowIndex;
         }
     }

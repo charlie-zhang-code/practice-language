@@ -56,7 +56,9 @@ public class SearchInsertPosition {
     class Solution {
         public int searchInsert(int[] nums, int target) {
             /* ====================================================
-             * 暴力搜索
+             * 暴力解法
+             * 遍历数组，找到第一个大于等于target的元素，返回索引
+             * 如果找不到，则返回数组长度
              * ==================================================== */
 
             /*
@@ -70,21 +72,29 @@ public class SearchInsertPosition {
 
             /* ====================================================
              * 题目中数组是已经排序好的，因此可以使用二分查找，
+             * 找到第一个大于等于target的元素，返回索引
              * ==================================================== */
-            int left = 0;
-            int right = nums.length - 1;
-            while (left <= right) {
+            int left = 0; // 左边界
+            int right = nums.length - 1; // 右边界
+            while (left <= right) { // 使用左闭右闭的区间
                 int mid = left + (right - left) / 2;
+
                 if (target > nums[mid]) {
+                    // 如果中间值小于目标值，则目标值在右侧，更新左边界
+                    // 取值可能在 [mid + 1, right] 之间
                     left = mid + 1;
                 } else if (target < nums[mid]) {
+                    // 如果中间值大于目标值，则目标值在左侧，更新右边界
+                    // 取值可能在 [left, mid - 1] 之间
                     right = mid - 1;
                 } else {
+                    // 如果中间值等于目标值，则返回索引
                     return mid;
                 }
             }
 
-            return left;
+            // 如果找不到，则返回数组长度
+            return right + 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
